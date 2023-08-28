@@ -6,10 +6,12 @@ import {
 import thunk from 'redux-thunk' //Redux Thunk is a middleware that allows to write action creators that return a function instead of an action. It's useful for handling asynchronous actions, such as API calls.
 import { composeWithDevTools } from 'redux-devtools-extension' //This is a development tool for debugging Redux state and actions.
 import { productListReducers } from './reducers/productReducers'
+import { productDetailsReducers } from './reducers/productReducers'
 
 //Redux reducers reduce a set of actions (over time) into a single state.
 const reducer = combineReducers({
   productList: productListReducers,
+  productDetails: productDetailsReducers,
 }) //combineReducers to combine multiple reducer functions into a single reducer function.
 
 const initialState = {}
