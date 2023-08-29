@@ -1,4 +1,4 @@
-import { CARD_ADD_ITEM } from '../constants/cartConstants'
+import { CARD_ADD_ITEM, CARD_REMOVE_ITEM } from '../constants/cartConstants'
 
 //check if the items are already exist in the cart then only update the quantity
 //and not in the cart then it take action.payload and update cart array
@@ -22,6 +22,11 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           ...state,
           cartItems: [...state.cartItems, item], //return original state and new item to the cart items
         }
+      }
+    case CARD_REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       }
     default:
       return state
