@@ -7,14 +7,22 @@ import thunk from 'redux-thunk' //Redux Thunk is a middleware that allows to wri
 import { composeWithDevTools } from 'redux-devtools-extension' //This is a development tool for debugging Redux state and actions.
 import { productListReducers } from './reducers/productReducers'
 import { productDetailsReducers } from './reducers/productReducers'
+import { cartReducer } from './reducers/cartReducer'
 
 //Redux reducers reduce a set of actions (over time) into a single state.
 const reducer = combineReducers({
   productList: productListReducers,
   productDetails: productDetailsReducers,
+  cart: cartReducer,
 }) //combineReducers to combine multiple reducer functions into a single reducer function.
 
-const initialState = {}
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+  ? JSON.parse(localStorage.getItem('cartItems'))
+  : []
+
+const initialState = {
+  cart: { cartItems: cartItemsFromStorage },
+}
 
 const middleware = [thunk] //Middleware in Redux is a way to extend Redux with custom functionality.
 
