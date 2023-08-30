@@ -8,20 +8,27 @@ import { composeWithDevTools } from 'redux-devtools-extension' //This is a devel
 import { productListReducers } from './reducers/productReducers'
 import { productDetailsReducers } from './reducers/productReducers'
 import { cartReducer } from './reducers/cartReducer'
+import { userLoginReducers } from './reducers/userReducer'
 
 //Redux reducers reduce a set of actions (over time) into a single state.
 const reducer = combineReducers({
   productList: productListReducers,
   productDetails: productDetailsReducers,
   cart: cartReducer,
+  userLogin: userLoginReducers,
 }) //combineReducers to combine multiple reducer functions into a single reducer function.
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
   : []
 
+const userInfoFromStorage = localStorage.getItem('userInfo')
+  ? JSON.parse(localStorage.getItem('userInfo'))
+  : null
+
 const initialState = {
   cart: { cartItems: cartItemsFromStorage },
+  userLogin: { userInfo: userInfoFromStorage },
 }
 
 const middleware = [thunk] //Middleware in Redux is a way to extend Redux with custom functionality.
