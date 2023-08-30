@@ -21,7 +21,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/',include('proshop.urls')),
+    #path('api/',include('proshop.urls')),
+    path('api/products/',include('proshop.urls.product_urls')),
+    path('api/users/',include('proshop.urls.user_urls')),
+    path('api/orders/',include('proshop.urls.order_urls')),
 ]
 
 # To see product images at zoom
