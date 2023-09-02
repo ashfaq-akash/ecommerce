@@ -2,6 +2,7 @@ import {
   CARD_ADD_ITEM,
   CARD_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
+  CARD_SAVE_PAYMENT_METHOD,
 } from '../constants/cartConstants'
 
 //check if the items are already exist in the cart then only update the quantity
@@ -39,6 +40,11 @@ export const cartReducer = (
       return {
         ...state,
         shippingAddress: action.payload,
+      }
+    case CARD_SAVE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymentMethod: action.payload,
       }
     default:
       return state

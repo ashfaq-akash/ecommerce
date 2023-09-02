@@ -6,6 +6,7 @@ import { saveShippingAddress } from '../actions/cartActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
+import ChekoutSteps from '../components/ChekoutSteps'
 
 function ShippingScreen() {
   const cart = useSelector((state) => state.cart)
@@ -27,6 +28,7 @@ function ShippingScreen() {
 
   return (
     <FormContainer>
+      <ChekoutSteps step1 step2 />
       <h1>Shipping Address</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='address'>
