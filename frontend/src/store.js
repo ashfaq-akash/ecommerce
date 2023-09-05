@@ -17,6 +17,7 @@ import {
 import {
   orderCreateReducer,
   orderDetailsReducer,
+  orderPayReducer,
 } from './reducers/orderReducer'
 
 //Redux reducers reduce a set of actions (over time) into a single state.
@@ -30,6 +31,7 @@ const reducer = combineReducers({
   userProfileUpdate: userProfileUpdateReducers,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
 }) //combineReducers to combine multiple reducer functions into a single reducer function.
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
