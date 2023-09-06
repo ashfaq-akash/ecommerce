@@ -6,6 +6,7 @@ import Rating from '../components/Rating'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listUsers } from '../actions/userActions'
+import { deleteUser } from '../actions/userActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
@@ -18,16 +19,21 @@ function UserListScreen() {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
+  const userDelete = useSelector((state) => state.userDelete)
+  const { success } = userDelete
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers())
     } else {
       navigate('/login')
     }
-  }, [dispatch, navigate])
+  }, [dispatch, navigate, userInfo, success])
 
   const deleteHandler = (id) => {
-    console.log('delete')
+    if (window.confirm('Are you sure to delete this user')) {
+      dispatch(deleteUser(id))
+    }
   }
   return (
     <div>
