@@ -28,6 +28,7 @@ import {
   orderPayReducer,
   orderListMyReducer,
   orderListReducer,
+  orderDeliverReducer,
 } from './reducers/orderReducer'
 
 //Redux reducers reduce a set of actions (over time) into a single state.
@@ -43,6 +44,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
+  orderDeliver: orderDeliverReducer,
   orderList: orderListReducer,
   orderListMy: orderListMyReducer,
   userList: userListReducer,
