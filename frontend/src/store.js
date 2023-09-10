@@ -9,6 +9,8 @@ import {
   productListReducers,
   productDetailsReducers,
   productDeleteReducers,
+  productCreateReducers,
+  productUpdateReducers,
 } from './reducers/productReducers'
 import { cartReducer } from './reducers/cartReducer'
 import {
@@ -30,6 +32,7 @@ import {
 //Redux reducers reduce a set of actions (over time) into a single state.
 const reducer = combineReducers({
   productList: productListReducers,
+  productCreate: productCreateReducers,
   productDetails: productDetailsReducers,
   cart: cartReducer,
   userLogin: userLoginReducers,
@@ -44,6 +47,7 @@ const reducer = combineReducers({
   userDelete: userDelteReducer,
   userUpdate: userUpdateReducer,
   productDelete: productDeleteReducers,
+  productUpdate: productUpdateReducers,
 }) //combineReducers to combine multiple reducer functions into a single reducer function.
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

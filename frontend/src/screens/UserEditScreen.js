@@ -9,7 +9,7 @@ import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { USER_UPDATE_RESET } from '../constants/userConstants'
 
-function EditUserScreen() {
+function UserEditScreen() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
@@ -25,11 +25,11 @@ function EditUserScreen() {
   const {
     loading: loadingUpdate,
     error: errorUpdate,
-    success: sucessupdate,
+    success: successUpdate,
   } = userUpdate
 
   useEffect(() => {
-    if (sucessupdate) {
+    if (successUpdate) {
       dispatch({ type: USER_UPDATE_RESET })
       navigate('/admin/userlist')
     } else {
@@ -41,7 +41,7 @@ function EditUserScreen() {
         setIsAdmin(user.isAdmin)
       }
     }
-  }, [user, userId, sucessupdate, dispatch, navigate])
+  }, [user, userId, successUpdate, dispatch, navigate])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -103,4 +103,4 @@ function EditUserScreen() {
   )
 }
 
-export default EditUserScreen
+export default UserEditScreen
