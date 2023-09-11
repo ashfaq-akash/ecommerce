@@ -21,22 +21,33 @@ import {
 } from '../constants/productConstants'
 import { useSelector } from 'react-redux'
 
-export const listProducts = (keyword) => async (dispatch) => {
-  dispatch({ type: PRODUCT_LIST_REQUEST })
+export const listProducts =
+  (keyword = '', page = '') =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_LIST_REQUEST })
 
-  let url = '/api/products'
+      // Build the URL dynamically
+      let url = '/api/products/?'
+      if (keyword) url += `keyword=${keyword}&`
+      if (page) url += `page=${page}`
 
-  if (keyword) {
-    url += `?keyword=${keyword}`
+      const { data } = await axios.get(url)
+
+      dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      })
+    }
   }
-
-  const { data } = await axios.get(url)
-
-  dispatch({
-    type: PRODUCT_LIST_SUCCESS,
-    payload: data,
-  })
-}
 
 export const ProductDetails = (id) => async (dispatch) => {
   try {

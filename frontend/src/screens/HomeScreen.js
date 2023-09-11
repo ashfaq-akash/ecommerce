@@ -6,18 +6,27 @@ import { listProducts } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { useLocation } from 'react-router-dom'
+import Paginate from '../components/Paginate'
 
 function HomeScreen() {
   const dispatch = useDispatch()
   const productList = useSelector((state) => state.productList)
-  const { error, loading, products } = productList
+  const { error, loading, products, page, pages } = productList
 
   const location = useLocation()
-  const keyword = new URLSearchParams(location.search).get('keyword')
+  const keyword = new URLSearchParams(location.search).get('keyword') || ''
+  const new_page = new URLSearchParams(location.search).get('page')
+
+  const [currentKeyword, setCurrentKeyword] = useState(keyword)
 
   useEffect(() => {
-    dispatch(listProducts(keyword))
-  }, [dispatch, keyword])
+    if (currentKeyword !== keyword) {
+      setCurrentKeyword(keyword)
+      dispatch(listProducts(keyword, 1))
+    } else {
+      dispatch(listProducts(keyword, new_page))
+    }
+  }, [dispatch, keyword, new_page, currentKeyword])
 
   return (
     <div>
@@ -29,13 +38,16 @@ function HomeScreen() {
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Row>
-          {products.map((product) => (
-            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-              <Product product={product} />
-            </Col>
-          ))}
-        </Row>
+        <div>
+          <Row>
+            {products.map((product) => (
+              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                <Product product={product} />
+              </Col>
+            ))}
+          </Row>
+          <Paginate page={page} pages={pages} keyword={keyword} />
+        </div>
       )}
     </div>
   )
